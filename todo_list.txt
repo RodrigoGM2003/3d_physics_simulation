@@ -1,0 +1,3 @@
+hacer la clase simulador
+hacer una clase para manejear eventos
+hacer un window manager
