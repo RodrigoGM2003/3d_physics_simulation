@@ -16,6 +16,9 @@ class Quaternion {
 public:
     float w, x, y, z;
 
+    static const Quaternion Identity;
+
+
     /**
      * @brief Default constructor, initializes as identity quaternion (1, 0, 0, 0).
      */
@@ -31,119 +34,117 @@ public:
     Quaternion(float w, float x, float y, float z) : w(w), x(x), y(y), z(z) {}
 
     /**
-     * @brief Creates a quaternion from an angle-axis representation.
-     * @param angle The angle in degrees.
+     * @brief Creates a quaternion from an angle-axis representation (in radians).
      * @param axis The axis of rotation (should be normalized).
+     * @param angle The angle in degrees.
      * @return The resulting quaternion.
      */
-    static Quaternion fromAxisAngle(float angle, const Vector3& axis) {
-        float halfAngle = angle * 0.5f * (M_PI / 180.0f);
-        float sinHalfAngle = sin(halfAngle);
-        return Quaternion(cos(halfAngle), axis.x * sinHalfAngle, axis.y * sinHalfAngle, axis.z * sinHalfAngle);
-    }
-
+    static Quaternion fromAxisAngleRads(const Vector3& axis, float angle);
+    
+    /**
+     * @brief Creates a quaternion from an angle-axis representation (in degrees).
+     * @param axis The axis of rotation (should be normalized).
+     * @param angle The angle in degrees.
+     * @return The resulting quaternion.
+     */
+    static Quaternion fromAxisAngleDeg(const Vector3& axis, float angle);
+    
+    
     /**
      * @brief Creates a quaternion representing rotation between two vectors.
      * @param from The initial vector.
      * @param to The target vector.
      * @return The resulting quaternion.
      */
-    static Quaternion fromTwoVectors(const Vector3& from, const Vector3& to) {
-        Vector3 f = from.normalize();
-        Vector3 t = to.normalize();
-        Vector3 crossProd = f.cross(t);
-        float dotProd = f.dot(t);
-        float w = sqrt(from.lengthSquared() * to.lengthSquared()) + dotProd;
-        return Quaternion(w, crossProd.x, crossProd.y, crossProd.z).normalize();
-    }
+    static Quaternion fromTwoVectors(const Vector3& from, const Vector3& to);
 
     /**
      * @brief Normalizes the quaternion.
      * @return The normalized quaternion.
      */
-    Quaternion normalize() const {
-        float len = sqrt(w * w + x * x + y * y + z * z);
-        return Quaternion(w / len, x / len, y / len, z / len);
-    }
+    Quaternion normalize() const;
+
+
+    /**
+     * @brief In-place normalization of the quaternion.
+     */
+    void inPlaceNormalize() ;
+
+
+    /**
+     * @brief Calculates the inverse of the quaternion.
+     * @return The inverse quaternion.
+     */
+    Quaternion inverse() const;
+
+    /**
+     * @brief Calculates the dot product of two quaternions.
+     * @param other The other quaternion.
+     * @return The dot product.
+     */
+    float dot(const Quaternion& other) const;
 
     /**
      * @brief Converts the quaternion to a rotation matrix.
      * @return The resulting 3x3 rotation matrix.
      */
-    Matrix3 toMatrix() const {
-        Matrix3 matrix;
-        matrix.m[0][0] = 1 - 2 * (y * y + z * z);
-        matrix.m[0][1] = 2 * (x * y - z * w);
-        matrix.m[0][2] = 2 * (x * z + y * w);
-        matrix.m[1][0] = 2 * (x * y + z * w);
-        matrix.m[1][1] = 1 - 2 * (x * x + z * z);
-        matrix.m[1][2] = 2 * (y * z - x * w);
-        matrix.m[2][0] = 2 * (x * z - y * w);
-        matrix.m[2][1] = 2 * (y * z + x * w);
-        matrix.m[2][2] = 1 - 2 * (x * x + y * y);
-        return matrix;
-    }
+    Matrix3 toMatrix() const;
 
     /**
      * @brief Operator for quaternion multiplication.
      * @param other The other quaternion.
      * @return The resulting quaternion.
      */
-    Quaternion operator*(const Quaternion& other) const {
-        return Quaternion(
-            w * other.w - x * other.x - y * other.y - z * other.z,
-            w * other.x + x * other.w + y * other.z - z * other.y,
-            w * other.y - x * other.z + y * other.w + z * other.x,
-            w * other.z + x * other.y - y * other.x + z * other.w
-        );
-    }
+    Quaternion operator*(const Quaternion& other) const;
 
     /**
      * @brief Multiplies the quaternion by a scalar.
      * @param scalar The scalar to multiply by.
      * @return The scaled quaternion.
      */
-    Quaternion operator*(float scalar) const {
-        return Quaternion(w * scalar, x * scalar, y * scalar, z * scalar);
-    }
+    Quaternion operator*(float scalar) const;
 
     /**
      * @brief Adds the component-wise addition of two quaternions.
      * @param other The other quaternion.
      * @return The resulting quaternion.
      */
-    Quaternion operator+(const Quaternion& other) const {
-        return Quaternion(w + other.w, x + other.x, y + other.y, z + other.z);
-    }
+    Quaternion operator+(const Quaternion& other) const;
 
     /**
      * @brief Subtracts one quaternion from another.
      * @param other The quaternion to subtract.
      * @return The resulting quaternion.
      */
-    Quaternion operator-(const Quaternion& other) const {
-        return Quaternion(w - other.w, x - other.x, y - other.y, z - other.z);
-    }
+    Quaternion operator-(const Quaternion& other) const;
+
+    /**
+     * @brief Equality operator for quaternions.
+     * @param other The other quaternion.
+     * @return True if the quaternions are equal, false otherwise.
+     */
+    bool operator==(const Quaternion& other) const;
+
+
+    /**
+     * @brief Inequality operator for quaternions.
+     * @param other The other quaternion.
+     * @return True if the quaternions are not equal, false otherwise.
+     */
+    bool operator!=(const Quaternion& other) const;
 
     /**
      * @brief Rotates a vector by this quaternion.
      * @param vec The vector to rotate.
      * @return The rotated vector.
      */
-    Vector3 rotate(const Vector3& vec) const {
-        Quaternion vecQuat(0, vec.x, vec.y, vec.z);
-        Quaternion result = (*this) * vecQuat * conjugate();
-        return Vector3(result.x, result.y, result.z);
-    }
+    Vector3 rotate(const Vector3& vec) const;
 
     /**
      * @brief Conjugate of the quaternion (negates the imaginary part).
      * @return The conjugate quaternion.
      */
-    Quaternion conjugate() const {
-        return Quaternion(w, -x, -y, -z);
-    }
-
+    Quaternion conjugate() const;
 
 };
 

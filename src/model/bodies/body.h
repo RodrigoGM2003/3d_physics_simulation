@@ -9,6 +9,7 @@
 
 #include "utils/utils.h"
 #include "utils/vector3.h"
+#include "utils/quaternion.h"
 
 
 namespace model{
@@ -26,7 +27,7 @@ namespace model{
 class Body{
 protected:
     utils::Vector3 position;
-    // utils::Quaternion orientation;
+    utils::Quaternion orientation;
 
 public:
     /**
@@ -44,29 +45,29 @@ public:
     /**
      * @brief Draw the body
      */
-    virtual void draw();
+    virtual void draw() = 0;
 
     /**
      * @brief Get the position of the body
      */
-    virtual utils::Vector3 getPosition() = 0;
+    virtual utils::Vector3 getPosition() const;
 
     /**
      * @brief Set the position of the body
      * @param p The new position of the body
      */
-    virtual void setPosition(const utils::Vector3& p) = 0;
+    virtual void setPosition(const utils::Vector3& p);
 
-    //  /**
-    //  * @brief Get the orientation of the body
-    //  */
-    // virtual utils::Quaternion getOrientation() = 0;
-
-    // /**
-    //  * @brief Set the Orientation of the body
-    //  * @param o The new orientation of the body
-    //  */
-    // virtual void setOrientation(const utils::Quaternion& o) = 0;
+     /**
+     * @brief Get the orientation of the body
+     */
+    virtual utils::Quaternion getOrientation() const;
+ 
+    /**
+     * @brief Set the Orientation of the body
+     * @param o The new orientation of the body
+     */
+    virtual void setOrientation(const utils::Quaternion& o);
 
     ~Body() = default;
 };

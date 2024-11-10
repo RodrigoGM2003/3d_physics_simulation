@@ -6,11 +6,15 @@
 #include "model/bodies/body.h"
 #include "utils/color.h"
 #include "model/modelo.h"
+#include "model/drawers/prismDrawer.h"
+#include "utils/vector3.h"
+#include "utils/quaternion.h"
 
 namespace view{
     Ejes ejes = Ejes();
     // model::Body bod = model::Body(utils::Vector3(2, 2, 2));
-
+    model::PrismDrawer body = model::PrismDrawer();
+    utils::Quaternion q = utils::Quaternion(1, 0, 0, 0);
 
     float view_rotx = 30, view_roty = 45;
     float D = 10;
@@ -63,7 +67,7 @@ void view::initializeWindow(GLsizei width, GLsizei height) {
 }
 
 void view::renderScene() {
-	static GLfloat pos[4] = {5.0, 5.0, 10.0, 0.0}; // Light position
+	static GLfloat pos[4] = {5.0, 10.0, 10.0, 0.0}; // Light position
 
 	utils::Color backGround = utils::Color(0.1f, 0.1f, 0.1f, 1.0f);
 
@@ -78,6 +82,15 @@ void view::renderScene() {
 	glLightfv(GL_LIGHT0, GL_POSITION, pos); // Light declaration. Placed here is fixed in the scene
 
 	ejes.draw(); // Draw the axes
+
+    body.setColor(utils::Color(0.0f, 1.0f, 0.0f, 1.0f));
+
+    q = q * utils::Quaternion(0.01, 1, 1, 0);
+    q.inPlaceNormalize();
+
+    body.draw(utils::Vector3(0, 0, 0), q);
+
+
 
 	// bod.draw();
 
