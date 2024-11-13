@@ -2,7 +2,9 @@
 #define RIDIGBODY_H
 
 #include "model/bodies/body.h"
+#include "model/drawers/drawer.h"
 #include "utils/matrix3.h"
+
 
 namespace model{
 
@@ -27,7 +29,14 @@ protected:
 
     //TODO: Add collider and drawer
     //model::Collider collider;
-    //model::Drawer draw;
+    const model::Drawer& drawer;
+
+
+    RigidBody(const model::Drawer& drawer,
+        /*, TODO: const model::Collider& collider*/
+        float mass = 1.0f, 
+        bool isStatic = false
+    );
 
 public:
     /**
@@ -215,7 +224,6 @@ private:
      */
     void integrateAngular(float deltaTime);
 };
-
 
 };
 

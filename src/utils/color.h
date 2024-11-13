@@ -1,6 +1,8 @@
 #ifndef COLOR_H
 #define COLOR_H
 
+#include "../freeglut.3.0.0.v140.1.0.2/sources/GL/glut.h"
+
 #include <string>
 
 
@@ -13,7 +15,7 @@ namespace utils{
         /**
          * @brief The x, y and z components of the vector
          */
-        float r, g, b, a;
+        GLfloat rgba[4];
 
         /**
          * @brief Default constructor
@@ -50,6 +52,13 @@ namespace utils{
          * @param other The color to copy
          */
         Color(const Color& other);
+
+        /**
+         * @brief Get the color data
+         * @return A pointer to the color data
+         */
+        const GLfloat* data() const;
+
     };
 }
 

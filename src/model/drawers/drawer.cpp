@@ -13,10 +13,12 @@ utils::Color Drawer::getColor() const{
     return color;
 }
 
-void Drawer::draw(const utils::Vector3& position, const utils::Quaternion& orientation){
-    glBegin(GL_TRIANGLES);
+void Drawer::draw(const utils::Vector3& position, const utils::Quaternion& orientation) const{
+    glShadeModel(GL_FLAT);
+    glMaterialfv (GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color.data());
 
-    glColor3f(color.r, color.g, color.b);
+    
+    glBegin(GL_TRIANGLES);
     
     const auto& order = getOrder();                // Precomputed vertex order for drawing
     const auto& staticNormals = getStaticNormals(); // Precomputed face normals

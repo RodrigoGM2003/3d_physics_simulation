@@ -1,38 +1,43 @@
 #include "utils/color.h"
 #include <string>
 
-utils::Color::Color() : r(0), g(0), b(0), a(1) {}
+utils::Color::Color() : rgba{0, 0, 0, 1} {}
 
 utils::Color::Color(float r, float g, float b, float a) {
-    this->r = static_cast<float>(r);
-    this->g = static_cast<float>(g);
-    this->b = static_cast<float>(b);
-    this->a = static_cast<float>(a);
+    this->rgba[0] = r;
+    this->rgba[1] = g;
+    this->rgba[2] = b;
+    this->rgba[3] = a;
 }
 
 utils::Color::Color(int r, int g, int b, float a){
     if (r + g + b > 3){
-        this->r = r / 255.0;
-        this->g = g / 255.0;
-        this->b = b / 255.0;
+        this->rgba[0] = rgba[0] / 255.0f;
+        this->rgba[1] = rgba[1] / 255.0f;
+        this->rgba[2] = rgba[2] / 255.0f;
+
     } else {
-        this->r = r;
-        this->g = g;
-        this->b = b;
+        this->rgba[0] = r;
+        this->rgba[1] = g;
+        this->rgba[2] = b;
     }
-    this->a = a;
+    this->rgba[3] = a;
 }
 
 utils::Color::Color(const std::string& hexValue, float a){
-    this->r = std::stoi(hexValue.substr(1, 2), nullptr, 16) / 255.0f;
-    this->g = std::stoi(hexValue.substr(3, 2), nullptr, 16) / 255.0f;
-    this->b = std::stoi(hexValue.substr(5, 2), nullptr, 16) / 255.0f;
-    this->a = a;
+    this->rgba[0] = std::stoi(hexValue.substr(1, 2), nullptr, 16) / 255.0f;
+    this->rgba[1] = std::stoi(hexValue.substr(3, 2), nullptr, 16) / 255.0f;
+    this->rgba[2] = std::stoi(hexValue.substr(5, 2), nullptr, 16) / 255.0f;
+    this->rgba[3] = a;
 }
 
 utils::Color::Color(const Color& other){
-    this->r = other.r;
-    this->g = other.g;
-    this->b = other.b;
-    this->a = other.a;
+    this->rgba[0] = other.rgba[0];
+    this->rgba[1] = other.rgba[1];
+    this->rgba[2] = other.rgba[2];
+    this->rgba[3] = other.rgba[3];
+}
+
+const GLfloat* utils::Color::data() const{
+    return rgba;
 }

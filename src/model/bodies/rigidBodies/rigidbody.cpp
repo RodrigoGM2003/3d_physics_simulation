@@ -4,6 +4,15 @@
 
 namespace model{
 
+RigidBody::RigidBody(const model::Drawer& drawer,
+            /*, TODO: const model::Collider& collider*/
+            float mass, bool isStatic
+            )
+            : drawer(drawer) /*, collider(collider)*/{
+    this->setMass(mass);
+    this->setIsStatic(isStatic);
+}
+
 
 void RigidBody::setPosition(const utils::Vector3& position){
     setPosition(position);
@@ -130,12 +139,8 @@ void RigidBody::update(float deltaTime){
 
 
 void RigidBody::draw(){
-    //TODO: drawer.draw(position, orientation);
+    drawer.draw(position, orientation);
 }
-
-
-
-
 
 void RigidBody::updateCollider(){
     //TODO: Update collider

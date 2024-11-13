@@ -25,6 +25,12 @@ public:
     static Matrix3 identity();
 
     /**
+     * @brief Creates a zero matrix
+     * @return The zero matrix
+     */
+    static Matrix3 zero();
+
+    /**
      * @brief Creates a rotation matrix around the X axis
      * @param angle The angle of rotation in degrees
      * @return The rotation matrix
@@ -65,6 +71,14 @@ public:
      * @param values The values of the matrix
      */
     Matrix3(float values[3][3]);
+
+    /**
+     * @brief Constructor with parameters
+     * @param vx The value at position (x, x)
+     */
+    Matrix3(float v00, float v01, float v02, 
+            float v10, float v11, float v12, 
+            float v20, float v21, float v22);
 
 
     /**

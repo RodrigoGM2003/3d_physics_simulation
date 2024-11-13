@@ -1,24 +1,21 @@
 #ifndef CUBE_DRAWER_H
 #define CUBE_DRAWER_H
 
-#include "model/drawers/drawer.h"
+#include "model/drawers/prismDrawer.h"
 
 
 namespace model{
 
-class CubeDrawer : public Drawer{
-private:
-
-
+class CubeDrawer : public PrismDrawer{
 public:
+
     /**
-     * @brief Draw the object
+     * @brief Construct a new Cube Drawer object
+     * @param size The size of the cube
      */
-    void draw() override;
+    CubeDrawer(float size = 1);
 
-
-
-
+    ~CubeDrawer() = default;
 };
 
 

@@ -16,6 +16,14 @@ Matrix3 Matrix3::identity() {
     return result;
 }
 
+Matrix3 Matrix3::zero() {
+    Matrix3 result;
+    for (int i = 0; i < 3; ++i)
+        for (int j = 0; j < 3; ++j)
+            result.m[i][j] = 0.0f;
+    return result;
+}
+
 Matrix3 Matrix3::rotationX(float angle) {
     float radians = utils::deg2rad(angle);
 
@@ -70,6 +78,14 @@ Matrix3::Matrix3(float values[3][3]) {
     for (int i = 0; i < 3; ++i)
         for (int j = 0; j < 3; ++j)
             m[i][j] = values[i][j];
+}
+
+Matrix3::Matrix3(float v00, float v01, float v02,
+                 float v10, float v11, float v12,
+                 float v20, float v21, float v22) {
+    m[0][0] = v00; m[0][1] = v01; m[0][2] = v02;
+    m[1][0] = v10; m[1][1] = v11; m[1][2] = v12;
+    m[2][0] = v20; m[2][1] = v21; m[2][2] = v22;
 }
 
 Matrix3 Matrix3::operator+(const Matrix3& other) const {

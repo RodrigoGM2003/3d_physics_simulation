@@ -15,6 +15,7 @@ namespace view{
     // model::Body bod = model::Body(utils::Vector3(2, 2, 2));
     model::PrismDrawer body = model::PrismDrawer();
     utils::Quaternion q = utils::Quaternion(1, 0, 0, 0);
+    utils::Vector3 p = utils::Vector3(0, 0, 0);
 
     float view_rotx = 30, view_roty = 45;
     float D = 10;
@@ -73,7 +74,7 @@ void view::renderScene() {
 
 	glPushMatrix(); // Push the current geometric transformation
 
-	glClearColor(backGround.r, backGround.b, backGround.g, backGround.a); // Set the background color to black
+	glClearColor(backGround.rgba[0], backGround.rgba[1], backGround.rgba[2], backGround.rgba[3]); // Set the background color to black
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Initialize the color buffer and Z-Buffer
 
@@ -83,13 +84,15 @@ void view::renderScene() {
 
 	ejes.draw(); // Draw the axes
 
-    body.setColor(utils::Color(0.0f, 1.0f, 0.0f, 1.0f));
 
-    q = q * utils::Quaternion(0.01, 1, 1, 0);
+    body.setColor(utils::Color(1.0f, 1.0f, 1.0f, 1.0f));
+
+    // q = q * utils::Quaternion(.1, 2, 0.0, 0.0);
     q.inPlaceNormalize();
 
-    body.draw(utils::Vector3(0, 0, 0), q);
+    // p += utils::Vector3(0.01, 0.0, 0.00);
 
+    body.draw(p, q);
 
 
 	// bod.draw();
