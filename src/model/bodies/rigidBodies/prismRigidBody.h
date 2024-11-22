@@ -36,7 +36,7 @@ public:
      * @brief Start the parameters of the body
      * @param startData The data to start the body
      */
-    virtual void start(const std::string& startData) override = 0;
+    void start(const std::string& startData) override;
 
     ~PrismRigidBody() = default;
 

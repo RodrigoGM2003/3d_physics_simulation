@@ -9,11 +9,30 @@
 #include "model/drawers/prismDrawer.h"
 #include "utils/vector3.h"
 #include "utils/quaternion.h"
+#include "model/bodies/rigidBodies/prismRigidBody.h"
 
 namespace view{
     Ejes ejes = Ejes();
-    // model::Body bod = model::Body(utils::Vector3(2, 2, 2));
-    model::PrismDrawer body = model::PrismDrawer();
+//     PrismRigidBody::PrismRigidBody(float mass, 
+//     bool isStatic, 
+//     float height, 
+//     float width, 
+//     float depth,
+//     const utils::Color color,
+//     const float elasticity,
+//     const float friction
+// )
+    model::PrismRigidBody myBody = model::PrismRigidBody(
+        1.0f, 
+        false, 
+        2.0f, 
+        3.0f, 
+        5.0f, 
+        utils::Color(0.0f, 0.0f, 1.0f, 1.0f), 
+        0.5f, 
+        0.5f
+    );
+
     utils::Quaternion q = utils::Quaternion(1, 0, 0, 0);
     utils::Vector3 p = utils::Vector3(0, 0, 0);
 
@@ -85,16 +104,14 @@ void view::renderScene() {
 	ejes.draw(); // Draw the axes
 
 
-    body.setColor(utils::Color(1.0f, 1.0f, 1.0f, 1.0f));
-
-    // q = q * utils::Quaternion(.1, 2, 0.0, 0.0);
+    q = q * utils::Quaternion(.1, 0.0, 1.0, 0.0);
     q.inPlaceNormalize();
 
     // p += utils::Vector3(0.01, 0.0, 0.00);
 
-    body.draw(p, q);
-
-
+    myBody.start("hola");
+    myBody.draw();
+    std::cout<<"Aqui"<<std::endl;
 	// bod.draw();
 
     // simulator.draw(); // Draw the current state of the simulator

@@ -20,6 +20,13 @@ CubeRigidBody::CubeRigidBody(
         color,
         elasticity,
         friction
-        ){}
+        ){
+    updateInertiaTensor();
+}
     
+
+void CubeRigidBody::start(const std::string& startData){
+    return;
+};
+
 };

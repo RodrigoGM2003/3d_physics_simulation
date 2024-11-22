@@ -5,7 +5,8 @@
 
 namespace model{
 
-PrismRigidBody::PrismRigidBody(float mass, 
+PrismRigidBody::PrismRigidBody(
+    float mass, 
     bool isStatic, 
     float height, 
     float width, 
@@ -15,15 +16,26 @@ PrismRigidBody::PrismRigidBody(float mass,
     const float friction
 )
     : RigidBody(
-        PrismDrawer(width, height, depth),
+        std::make_shared<PrismDrawer>(height, width, depth),
         /*TODO: PrismCollider*/
         mass, 
-        isStatic
+        isStatic,
+        color
     ), 
     height(height), 
     width(width), 
     depth(depth){
-        updateInertiaTensor();
+    // updateInertiaTensor();
+}
+
+void PrismRigidBody::start(const std::string& startData){
+    std::cout<<startData<<std::endl;
+    setPosition(utils::Vector3(5, 0, 0));
+    setOrientation(utils::Quaternion::Identity);
+    setVelocity(utils::Vector3(0, 0, 0));
+    setAngularVelocity(utils::Vector3(0, 0, 0));
+    setAcceleration(utils::Vector3(0, 0, 0));
+    setAngularAcceleration(utils::Vector3(0, 0, 0));
 }
 
 void PrismRigidBody::updateInertiaTensor(){
@@ -46,5 +58,7 @@ void PrismRigidBody::updateInertiaTensor(){
 
     inverseInertiaTensor = inertiaTensor.inverse();  // Assuming utils::Matrix3 has an inverse function
 }
+
+
 
 };

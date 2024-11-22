@@ -36,6 +36,7 @@ const std::vector<utils::Vector3> PrismDrawer::static_normals = {
 };
 
 const std::vector<int>& PrismDrawer::getOrder() const{
+    std::cout<<"PrismDrawer::getOrder()"<<std::endl;
     return order;
 }
 
@@ -47,6 +48,8 @@ PrismDrawer::PrismDrawer(float height, float width, float depth){
     this->height = height;
     this->width = width;
     this->depth = depth;
+
+    this->color = utils::Color(1.0f, 1.0f, 1.0f, 1.0f);
 
     this->vertices = {
         { -width / 2, -height / 2, -depth / 2 },

@@ -1,6 +1,8 @@
 #ifndef RIDIGBODY_H
 #define RIDIGBODY_H
 
+#include <memory>
+
 #include "model/bodies/body.h"
 #include "model/drawers/drawer.h"
 #include "utils/matrix3.h"
@@ -29,13 +31,22 @@ protected:
 
     //TODO: Add collider and drawer
     //model::Collider collider;
-    const model::Drawer& drawer;
+    // const model::Drawer& drawer;
+    std::shared_ptr<model::Drawer> drawer;
 
 
-    RigidBody(const model::Drawer& drawer,
+    /**
+     * @brief Construct a new Rigid Body object
+     * @param d The drawer of the body (shared pointer)
+     * @param c The collider of the body (shared pointer)
+     * @param mass The mass of the body
+     * @param isStatic If the body is static
+     */
+    RigidBody(std::shared_ptr<model::Drawer> d,
         /*, TODO: const model::Collider& collider*/
         float mass = 1.0f, 
-        bool isStatic = false
+        bool isStatic = false,
+        const utils::Color color = utils::Color(1.0f, 1.0f, 1.0f)
     );
 
 public:

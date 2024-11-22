@@ -4,18 +4,21 @@
 
 namespace model{
 
-RigidBody::RigidBody(const model::Drawer& drawer,
+RigidBody::RigidBody(std::shared_ptr<model::Drawer> d,
             /*, TODO: const model::Collider& collider*/
-            float mass, bool isStatic
+            float mass, bool isStatic, const utils::Color color
             )
-            : drawer(drawer) /*, collider(collider)*/{
+            : drawer(std::move(d)) /*, collider(collider)*/{
     this->setMass(mass);
     this->setIsStatic(isStatic);
+    drawer->setColor(color);
 }
 
 
 void RigidBody::setPosition(const utils::Vector3& position){
-    setPosition(position);
+    this->position = position;
+    //TODO:: Update collider
+    // updateCollider();
 }
 
 void RigidBody::setOrientation(const utils::Quaternion& orientation){
@@ -139,7 +142,11 @@ void RigidBody::update(float deltaTime){
 
 
 void RigidBody::draw(){
-    drawer.draw(position, orientation);
+    
+    // std::cout<<"Position: "<<position.x<<", "<<position.y<<", "<<position.z<<std::endl;
+    // std::cout<<"Orientation: "<<orientation.w<<", "<<orientation.x<<", "<<orientation.y<<", "<<orientation.z<<std::endl;
+    drawer->draw(position, orientation);
+    std::cout<<"Drawed"<<std::endl;
 }
 
 void RigidBody::updateCollider(){
