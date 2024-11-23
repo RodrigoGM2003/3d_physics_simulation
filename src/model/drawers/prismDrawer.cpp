@@ -36,7 +36,6 @@ const std::vector<utils::Vector3> PrismDrawer::static_normals = {
 };
 
 const std::vector<int>& PrismDrawer::getOrder() const{
-    std::cout<<"PrismDrawer::getOrder()"<<std::endl;
     return order;
 }
 

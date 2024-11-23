@@ -29,8 +29,8 @@ PrismRigidBody::PrismRigidBody(
 }
 
 void PrismRigidBody::start(const std::string& startData){
-    std::cout<<startData<<std::endl;
-    setPosition(utils::Vector3(5, 0, 0));
+    //TODO: Parse start data
+    setPosition(utils::Vector3(0, 0, 0));
     setOrientation(utils::Quaternion::Identity);
     setVelocity(utils::Vector3(0, 0, 0));
     setAngularVelocity(utils::Vector3(0, 0, 0));

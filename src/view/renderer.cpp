@@ -10,29 +10,9 @@
 #include "utils/vector3.h"
 #include "utils/quaternion.h"
 #include "model/bodies/rigidBodies/prismRigidBody.h"
+#include "model/drawers/axisDrawer.h"
 
 namespace view{
-    Ejes ejes = Ejes();
-//     PrismRigidBody::PrismRigidBody(float mass, 
-//     bool isStatic, 
-//     float height, 
-//     float width, 
-//     float depth,
-//     const utils::Color color,
-//     const float elasticity,
-//     const float friction
-// )
-    model::PrismRigidBody myBody = model::PrismRigidBody(
-        1.0f, 
-        false, 
-        2.0f, 
-        3.0f, 
-        5.0f, 
-        utils::Color(0.0f, 0.0f, 1.0f, 1.0f), 
-        0.5f, 
-        0.5f
-    );
-
     utils::Quaternion q = utils::Quaternion(1, 0, 0, 0);
     utils::Vector3 p = utils::Vector3(0, 0, 0);
 
@@ -86,7 +66,8 @@ void view::initializeWindow(GLsizei width, GLsizei height) {
     setProjection(fovY);
 }
 
-void view::renderScene() {
+void view::renderScene(const std::vector<std::shared_ptr<model::Body>>& bodies) {
+
 	static GLfloat pos[4] = {5.0, 10.0, 10.0, 0.0}; // Light position
 
 	utils::Color backGround = utils::Color(0.1f, 0.1f, 0.1f, 1.0f);
@@ -101,18 +82,14 @@ void view::renderScene() {
 
 	glLightfv(GL_LIGHT0, GL_POSITION, pos); // Light declaration. Placed here is fixed in the scene
 
-	ejes.draw(); // Draw the axes
-
 
     q = q * utils::Quaternion(.1, 0.0, 1.0, 0.0);
     q.inPlaceNormalize();
 
-    // p += utils::Vector3(0.01, 0.0, 0.00);
+    for (const auto& body : bodies) 
+        body->draw();
+    
 
-    myBody.start("hola");
-    myBody.draw();
-    std::cout<<"Aqui"<<std::endl;
-	// bod.draw();
 
     // simulator.draw(); // Draw the current state of the simulator
 

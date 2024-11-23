@@ -1,3 +1,21 @@
-hacer la clase simulador
-hacer una clase para manejear eventos
-hacer un window manager
+adapatar todo el codigo al nuevo formato
+
+
+starts:
+    start de prismRigidbody
+    start de sphereRigidbody
+    start de cubeRigidbody
+
+
+
+
+
+colliders 
+    añadir colliders a todos los rigidBodies
+    implementar updateCollider en rigidbody.cpp
+    añadir el updateCollider donde corresponde
+
+
+aplicar el impulso angular en rigidbody.cpp
+
+Simulator class

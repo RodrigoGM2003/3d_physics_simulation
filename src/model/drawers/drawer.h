@@ -32,7 +32,7 @@ public:
     /**
      * @brief Draw the object
      */
-    void draw(const utils::Vector3& position, const utils::Quaternion& orientation) const;
+    virtual void draw(const utils::Vector3& position, const utils::Quaternion& orientation) const;
 
     /**
      * @brief Set the color of the drawer

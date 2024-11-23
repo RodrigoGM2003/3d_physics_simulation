@@ -14,15 +14,6 @@
 
 namespace model{
 
-// class Body
-// {
-// public:
-//     utils::Vector3 position;
-//     float side;
-
-//     Body(utils::Vector3 position = utils::Vector3(0, 0, 0));
-//     void draw();
-// };
 
 class Body{
 protected:
@@ -45,7 +36,7 @@ public:
     /**
      * @brief Draw the body
      */
-    virtual void draw() = 0;
+    virtual void draw() const = 0;
 
     /**
      * @brief Get the position of the body

@@ -30,8 +30,7 @@ protected:
     bool isStatic;
 
     //TODO: Add collider and drawer
-    //model::Collider collider;
-    // const model::Drawer& drawer;
+    // std::shared_ptr<model::Collider> collider;
     std::shared_ptr<model::Drawer> drawer;
 
 
@@ -194,7 +193,7 @@ public:
 
     void update(float deltaTime) override;
 
-    void draw() override;
+    void draw() const override;
 
 
     ~RigidBody() = default;
@@ -204,7 +203,6 @@ private:
     /**
      * @brief Update the inertia tensor of the body
      */
-    //TODO: Implement this method
     virtual void updateInertiaTensor() = 0;
 
     /**

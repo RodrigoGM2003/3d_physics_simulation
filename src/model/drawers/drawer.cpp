@@ -15,24 +15,17 @@ utils::Color Drawer::getColor() const{
 
 void Drawer::draw(const utils::Vector3& position, const utils::Quaternion& orientation) const{
 
-    std::cout<<"Drawing1"<<std::endl;
     glShadeModel(GL_FLAT);
     glMaterialfv (GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color.data());
 
-    std::cout<<"Drawing2"<<std::endl;
     
     glBegin(GL_TRIANGLES);
     
-        std::cout<<"Drawing2.1"<<std::endl;
     const auto& order = this->getOrder();                // Precomputed vertex order for drawing
 
-    //TODO:
-    //TODO: EL FALLO ESTA ENTRE ESTAS DOS LINEAS
-    //TODO:
     
     const auto& staticNormals = getStaticNormals(); // Precomputed face normals
 
-    std::cout<<"Drawing3"<<std::endl;
     // Iterate through faces, using the static normal for each face
     for (size_t i = 0; i < order.size(); i += 3) {
         int faceIndex = i / 3;  // Assuming each face is represented by a triangle
@@ -50,7 +43,6 @@ void Drawer::draw(const utils::Vector3& position, const utils::Quaternion& orien
             glVertex3f(vertex.x + position.x, vertex.y + position.y, vertex.z + position.z);
         }
     }
-    std::cout<<"Drawing4"<<std::endl;
     glEnd();
 }
 

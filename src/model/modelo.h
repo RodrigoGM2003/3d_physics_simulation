@@ -41,73 +41,7 @@ public:
 	}
 };
 
-class Cubo : Objeto3D
-{
-private:
-	float lado;
 
-public:
-	Cubo(float l = 1) : lado(l) {};
-
-	void update()
-	{
-		lado += 0.01;
-	}
-	void draw()
-	{
-
-		glBegin(GL_QUADS);
-		{
-			// X POSITIVO
-			//   auto aux = NormalDadosVertices(lado, 0, lado, lado, 0, 0, lado, lado, lado);
-			auto aux = utils::triangleNormal(utils::Vector3(lado, 0, lado), 
-											utils::Vector3(lado, 0, 0), 
-											utils::Vector3(lado, lado, 0));
-			glNormal3f(aux.x, aux.y, aux.z);
-			// glNormal3f(1,0,0);
-			glVertex3f(lado, 0, 0);
-			glVertex3f(lado, lado, 0);
-			glVertex3f(lado, lado, lado);
-			glVertex3f(lado, 0, lado);
-
-			// Y POSITIVO
-			glNormal3f(0, 1, 0);
-			glVertex3f(0, lado, 0);
-			glVertex3f(0, lado, lado);
-			glVertex3f(lado, lado, lado);
-			glVertex3f(lado, lado, 0);
-
-			// Z POSITIVO
-			glNormal3f(0, 0, 1);
-			glVertex3f(0, 0, lado);
-			glVertex3f(lado, 0, lado);
-			glVertex3f(lado, lado, lado);
-			glVertex3f(0, lado, lado);
-
-			// X 0
-			glNormal3f(-1, 0, 0);
-			glVertex3f(0, 0, 0);
-			glVertex3f(0, 0, lado);
-			glVertex3f(0, lado, lado);
-			glVertex3f(0, lado, 0);
-
-			// Y 0
-			glNormal3f(0, -1, 0);
-			glVertex3f(0, 0, 0);
-			glVertex3f(lado, 0, 0);
-			glVertex3f(lado, 0, lado);
-			glVertex3f(0, 0, lado);
-
-			// Z 0
-			glNormal3f(0, 0, -1);
-			glVertex3f(0, 0, 0);
-			glVertex3f(0, lado, 0);
-			glVertex3f(lado, lado, 0);
-			glVertex3f(lado, 0, 0);
-		}
-		glEnd();
-	};
-};
 
 class Tetrahedro : Objeto3D
 {

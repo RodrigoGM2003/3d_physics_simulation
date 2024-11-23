@@ -18,13 +18,12 @@ RigidBody::RigidBody(std::shared_ptr<model::Drawer> d,
 void RigidBody::setPosition(const utils::Vector3& position){
     this->position = position;
     //TODO:: Update collider
-    // updateCollider();
+    updateCollider();
 }
 
 void RigidBody::setOrientation(const utils::Quaternion& orientation){
     this->orientation = orientation;
 
-    //TODO: ASK CHATGPT ABOUT THIS
     this->orientation.inPlaceNormalize();
 
     //TODO: Update collider
@@ -141,12 +140,8 @@ void RigidBody::update(float deltaTime){
 }
 
 
-void RigidBody::draw(){
-    
-    // std::cout<<"Position: "<<position.x<<", "<<position.y<<", "<<position.z<<std::endl;
-    // std::cout<<"Orientation: "<<orientation.w<<", "<<orientation.x<<", "<<orientation.y<<", "<<orientation.z<<std::endl;
+void RigidBody::draw() const{
     drawer->draw(position, orientation);
-    std::cout<<"Drawed"<<std::endl;
 }
 
 void RigidBody::updateCollider(){
@@ -176,6 +171,7 @@ void RigidBody::integrateAngular(float deltaTime){
 
     angularAcceleration = inverseInertiaTensor * torque;
     angularVelocity += angularAcceleration * deltaTime;
+    angularVelocity = utils::Vector3(0.1f, 0, 0); //TODO: Add damping
 
     float angle = angularVelocity.length() * deltaTime;
 

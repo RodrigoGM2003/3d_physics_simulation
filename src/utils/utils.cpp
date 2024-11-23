@@ -4,14 +4,6 @@
 
 namespace utils {
 
-/**
- * @brief Computes the normal of a triangle given its vertices
- * @param first The first vertex of the triangle
- * @param second The second vertex of the triangle
- * @param third The third vertex of the triangle
- * 
- * @return The normal of the triangle
- */
 Vector3 triangleNormal(const Vector3& first, const Vector3& second, const Vector3& third) {
     Vector3 u = second - first;
     Vector3 v = third - first;

@@ -41,7 +41,7 @@ public:
     ~PrismRigidBody() = default;
 
 protected:
-    /**TODO:
+    /**
      * @brief Update the inertia tensor of the body
      */
     void updateInertiaTensor() override;

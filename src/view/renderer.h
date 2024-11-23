@@ -2,6 +2,8 @@
 #define RENDERER_H
 
 #include <GL/gl.h>
+#include <memory>
+
 #include "model/modelo.h"
 #include "model/bodies/body.h"
 
@@ -37,7 +39,7 @@ namespace view{
     /**
      * @brief Renders the scene (draw function)
      */
-    void renderScene();
+    void renderScene(const std::vector<std::shared_ptr<model::Body>>& bodies);
 };
 
 

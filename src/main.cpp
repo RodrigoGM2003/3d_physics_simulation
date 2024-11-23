@@ -23,21 +23,24 @@ int main(int argc, char *argv[])
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutCreateWindow("Simulator");
 
-	controller::Controller controller;
-
-	glutReshapeFunc(view::initializeWindow);
-
-	glutDisplayFunc(controller::Draw);
-
-	// FUNCIONES DE INTERACCION
+	// Interaction functions
 	glutKeyboardFunc(letra);
 	glutSpecialFunc(especial);
-
 	glutMouseFunc(clickRaton);
 	glutMotionFunc(RatonMovido);
 
-	// Funcion de fondo
+	controller::Controller controller;
+
+	// Renderer functions
+	glutReshapeFunc(view::initializeWindow);
+	glutDisplayFunc(controller::Draw);
+
+
+	// Idle function
 	glutTimerFunc(30, controller::Update, 0);
+
+	// Start the simulator
+	controller::InitSimulator();
 
 	// Inicializa parametros de openGL
 	glEnable(GL_DEPTH_TEST);
@@ -47,5 +50,7 @@ int main(int argc, char *argv[])
 
 	// Lanza el gestor de eventos de glut
 	glutMainLoop();
+
+
 	return 0;
 }
