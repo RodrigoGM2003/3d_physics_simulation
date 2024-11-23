@@ -13,8 +13,6 @@
 #include "model/drawers/axisDrawer.h"
 
 namespace view{
-    utils::Quaternion q = utils::Quaternion(1, 0, 0, 0);
-    utils::Vector3 p = utils::Vector3(0, 0, 0);
 
     float view_rotx = 30, view_roty = 45;
     float D = 10;
@@ -82,14 +80,9 @@ void view::renderScene(const std::vector<std::shared_ptr<model::Body>>& bodies) 
 
 	glLightfv(GL_LIGHT0, GL_POSITION, pos); // Light declaration. Placed here is fixed in the scene
 
-
-    q = q * utils::Quaternion(.1, 0.0, 1.0, 0.0);
-    q.inPlaceNormalize();
-
     for (const auto& body : bodies) 
         body->draw();
     
-
 
     // simulator.draw(); // Draw the current state of the simulator
 

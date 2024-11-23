@@ -14,35 +14,6 @@ public:
 	virtual void draw() = 0; // Dibuja el objeto
 };
 
-class Ejes : Objeto3D
-{
-public:
-	float longitud = 30;
-	// Dibuja el objeto
-	void draw()
-	{
-		glDisable(GL_LIGHTING);
-		glBegin(GL_LINES);
-		{
-			glColor3f(0, 1, 0);
-			glVertex3f(0, 0, 0);
-			glVertex3f(0, longitud, 0);
-
-			glColor3f(1, 0, 0);
-			glVertex3f(0, 0, 0);
-			glVertex3f(longitud, 0, 0);
-
-			glColor3f(0, 0, 1);
-			glVertex3f(0, 0, 0);
-			glVertex3f(0, 0, longitud);
-		}
-		glEnd();
-		glEnable(GL_LIGHTING);
-	}
-};
-
-
-
 class Tetrahedro : Objeto3D
 {
 private:

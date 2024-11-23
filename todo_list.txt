@@ -1,5 +1,7 @@
 adapatar todo el codigo al nuevo formato
 
+AÑADIR FRICTION Y ELASTICITY
+
 
 starts:
     start de prismRigidbody
