@@ -27,31 +27,31 @@ void Controller::initSimulator() {
     bodies.push_back(yAxis);
     bodies.push_back(zAxis);
 
-    std::shared_ptr<model::PrismRigidBody> myBody = std::make_shared<model::PrismRigidBody>(
-        1.0f, 
-        false, 
-        2.0f, 
-        3.0f, 
-        5.0f, 
-        utils::Color(0.0f, 0.5f, 0.5f, 1.0f), 
-        0.5f, 
-        0.5f
-    );
+    // std::shared_ptr<model::PrismRigidBody> myBody = std::make_shared<model::PrismRigidBody>(
+    //     1.0f, 
+    //     false, 
+    //     2.0f, 
+    //     3.0f, 
+    //     5.0f, 
+    //     utils::Color(0.0f, 0.5f, 0.5f, 1.0f), 
+    //     0.5f, 
+    //     0.5f
+    // );
 
-    bodies.push_back(myBody);
+    // bodies.push_back(myBody);
 
-    auto myBody2 = std::make_shared<model::CubeRigidBody>(
-        1.0f, 
-        false, 
-        2.0f, 
-        utils::Color(0.5f, 0.0f, 0.5f, 1.0f), 
-        0.5f, 
-        0.5f
-    );
+    // auto myBody2 = std::make_shared<model::CubeRigidBody>(
+    //     1.0f, 
+    //     false, 
+    //     2.0f, 
+    //     utils::Color(0.5f, 0.0f, 0.5f, 1.0f), 
+    //     0.5f, 
+    //     0.5f
+    // );
 
-    myBody2->setPosition(utils::Vector3(4.0f, 0.0f, 0.0f));
+    // myBody2->setPosition(utils::Vector3(4.0f, 0.0f, 0.0f));
 
-    bodies.push_back(myBody2);
+    // bodies.push_back(myBody2);
 
 
     // lastUpdateTime = steady_clock::now();

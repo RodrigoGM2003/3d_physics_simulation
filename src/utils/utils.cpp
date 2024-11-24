@@ -8,7 +8,10 @@ Vector3 triangleNormal(const Vector3& first, const Vector3& second, const Vector
     Vector3 u = second - first;
     Vector3 v = third - first;
 
-    return u.cross(v).normalize();
+    auto normal = u.cross(v).normalize();
+    std::cout<<"Calculating normal: "<<normal.x<<" "<<normal.y<<" "<<normal.z<<std::endl;
+    return normal;
+    // return u.cross(v).normalize();
 }
 
 Quaternion slerp(const Quaternion& q1, const Quaternion& q2, float t) {
