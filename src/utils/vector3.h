@@ -1,6 +1,8 @@
 #ifndef VECTOR3_H
 #define VECTOR3_H
 
+#include <iostream>
+
 
 namespace utils{
 /**
@@ -137,12 +139,14 @@ public:
      */
     Vector3 operator/(float scalar) const;
 
+
     /**
      * @brief Combined operator to divide a vector by a scalar
      * @param scalar The scalar to divide by
      * @return The result of the division
      */
     Vector3& operator/=(float scalar);
+
 
     /**
      * @brief Computes the distance between two vectors
@@ -151,8 +155,17 @@ public:
      * @return The distance between the two vectors
      */
     static float distance(const Vector3& a, const Vector3& b);
-};
+    
 
+    /**
+     * @brief Prints the vector to an output stream
+     * @param os The output stream
+     * @param v The vector to print
+     * @return The output stream
+     */
+    friend std::ostream& operator<<(std::ostream& os, const Vector3& v);
+        
+};
 }
 
 

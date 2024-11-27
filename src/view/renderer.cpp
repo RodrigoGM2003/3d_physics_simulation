@@ -10,10 +10,15 @@
 #include "utils/vector3.h"
 #include "utils/quaternion.h"
 #include "model/drawers/icoDrawer.h"
+#include "model/drawers/sphereDrawer.h"
+#include "model/drawers/cubeDrawer.h"
 
 namespace view{
 
     auto icosahedron = std::make_shared<model::IcoDrawer>(1.0f);
+    auto cube = std::make_shared<model::CubeDrawer>(1.0f);
+
+    auto sphere = std::make_shared<model::SphereDrawer>(1.0f);
 
     float view_rotx = 30, view_roty = 45;
     float D = 10;
@@ -85,8 +90,17 @@ void view::renderScene(const std::vector<std::shared_ptr<model::Body>>& bodies) 
         body->draw();
     
 
-    icosahedron->setColor(utils::Color(.8f, .8f, .8f, 1.0f));
-    icosahedron->draw(utils::Vector3(0, 0, 0), utils::Quaternion(1, 0, 0, 0));
+    // icosahedron->setColor(utils::Color(.8f, .8f, .8f, 1.0f));
+    // icosahedron->draw(utils::Vector3(0, 0, 0), utils::Quaternion(1, 0, 0, 0));
+
+    // cube->setColor(utils::Color(.8f, .8f, .8f, 1.0f));
+    // cube->draw(utils::Vector3(2, 0, 0), utils::Quaternion(1, 0, 0, 0));
+    
+    sphere->setColor(utils::Color(.8f, .8f, .8f, 1.0f));
+    sphere->draw(utils::Vector3(4, 0, 0), utils::Quaternion(1, 0, 0, 0));
+
+    // sphere->setColor(utils::Color(.8f, .8f, .8f, 1.0f));
+    // sphere->draw(utils::Vector3(3, 0, 0), utils::Quaternion(1, 0, 0, 0));
 
     // simulator.draw(); // Draw the current state of the simulator
 

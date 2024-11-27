@@ -1,6 +1,8 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <vector>
+
 #include "utils/vector3.h"
 #include "utils/quaternion.h"
 
@@ -43,6 +45,25 @@ namespace utils{
      * @return The interpolated quaternion.
      */
     Quaternion slerp(const Quaternion& q1, const Quaternion& q2, float t);
+
+    /**
+     * @brief Interpolates between two vectors using spherical linear interpolation (SLERP).
+     * @param v1 The starting vector.
+     * @param v2 The ending vector.
+     * @param t The interpolation factor [0, 1].
+     * @return The interpolated vector.
+     */
+    Vector3 slerp(const Vector3& v1, const Vector3& v2, float t);
+
+
+    /**
+     * @brief Parses the vertices of an icosahedron
+     * @param vertices The vertices of the icosahedron
+     * @param n The number of vertices
+     * @return The vertices of the icosahedron
+     */
+    std::vector<Vector3> parseIcoVertices(const float* vertices, int n);
+
 }
 
 #endif

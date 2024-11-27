@@ -8,7 +8,7 @@ namespace model{
 class IcoDrawer : public Drawer{
 protected:
 
-    static const std::vector<utils::Vector3> static_vertices; /**< The vertices of the prism*/
+    // static const std::vector<utils::Vector3> static_vertices; /**< The vertices of the prism*/
     static const std::vector<int> order; /**< The draw order of the vertices*/
 
     static const std::vector<utils::Vector3> static_normals; /**< The normals of the prism*/

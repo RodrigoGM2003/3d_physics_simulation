@@ -1,5 +1,7 @@
 #include <math.h>
 #include <stdexcept>
+#include <iostream>
+
 
 #include "utils/vector3.h"
 
@@ -100,6 +102,11 @@ Vector3& Vector3::operator/=(float scalar) {
     y /= scalar;
     z /= scalar;
     return *this;
+}
+
+std::ostream& operator<<(std::ostream& os, const Vector3& v) {
+    os << "(" << v.x << ", " << v.y << ", " << v.z << ")";
+    return os;
 }
 
 bool Vector3::isZero() const {

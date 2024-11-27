@@ -21,8 +21,7 @@ void Drawer::draw(const utils::Vector3& position, const utils::Quaternion& orien
     
     glBegin(GL_TRIANGLES);
     
-    const auto& order = this->getOrder();                // Precomputed vertex order for drawing
-
+    const auto& order = this->getOrder(); // Precomputed vertex order for drawing
     
     const auto& staticNormals = getStaticNormals(); // Precomputed face normals
 
@@ -39,11 +38,12 @@ void Drawer::draw(const utils::Vector3& position, const utils::Quaternion& orien
         // Draw each vertex of the face
         for (int j = 0; j < 3; ++j) {
             const utils::Vector3& vertex = orientation.rotate(vertices[order[i + j]]);
-
             glVertex3f(vertex.x + position.x, vertex.y + position.y, vertex.z + position.z);
         }
     }
+
     glEnd();
+
 }
 
 };
